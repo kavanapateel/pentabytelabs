@@ -11,3 +11,4 @@ export * from './developmentProcess';
 export * from './portfolio';
 export * from './finalCta';
 export * from './footer';
+export * from './careers';

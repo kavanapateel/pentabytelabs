@@ -2,7 +2,7 @@ export const navigationData = [
   { id: 'home', label: 'Home', href: '#' },
   { id: 'services', label: 'Services', href: '#services' },
   { id: 'team', label: 'Our Team', href: '#team' },
-  { id: 'careers', label: 'Careers/Blogs', href: '#contact' },
+  { id: 'careers', label: 'Careers/Blogs', href: '#careers' },
   { 
     id: 'learning', 
     label: 'Start Learning', 

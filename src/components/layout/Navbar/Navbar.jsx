@@ -49,19 +49,37 @@ export const Navbar = () => {
       e.preventDefault();
       const targetId = href.replace('#', '');
 
-      if (!targetId || targetId === '') {
+      if (href === '#careers') {
+        window.location.hash = 'careers';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        const element = document.getElementById(targetId);
-        if (element) {
-          const navHeight = 80;
-          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-          const offsetPosition = elementPosition - navHeight;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
+        if (window.location.hash === '#careers') {
+          window.location.hash = href === '#' ? '' : href;
+          setTimeout(() => {
+            if (!targetId || targetId === '') {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+              const element = document.getElementById(targetId);
+              if (element) {
+                const navHeight = 80;
+                const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+                const offsetPosition = elementPosition - navHeight;
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+              }
+            }
+          }, 50);
+        } else {
+          if (!targetId || targetId === '') {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            const element = document.getElementById(targetId);
+            if (element) {
+              const navHeight = 80;
+              const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+              const offsetPosition = elementPosition - navHeight;
+              window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+            }
+          }
         }
       }
 
