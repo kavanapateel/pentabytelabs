@@ -3,7 +3,7 @@ import { Container, Section, SectionHeader } from '../../ui';
 import { servicesData } from '../../../data';
 
 const ServiceIcon = ({ type }) => {
-  const iconClasses = "w-7 h-7 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3";
+  const iconClasses = "w-6 h-6 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3";
   
   switch (type) {
     case 'code':
@@ -62,24 +62,46 @@ export const Services = () => {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }
+      transition: { 
+        staggerChildren: 0.1,
+        delayChildren: 0.1 
+      }
     }
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
+    hidden: { opacity: 0, y: 30, scale: 0.96 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
+
+  // Handle click on service card to scroll smoothly to contact form
+  const handleCardClick = (e) => {
+    e.preventDefault();
+    const element = document.getElementById('contact');
+    if (element) {
+      const navHeight = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - navHeight,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
-    <Section id="services" background="muted">
+    <Section id="services" background="muted" className="pt-4 pb-12 md:pt-8 md:pb-16">
       <Container>
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <SectionHeader
             badge={servicesData.header.badge}
@@ -89,55 +111,48 @@ export const Services = () => {
           />
         </motion.div>
 
-        {/* Services Grid */}
+        {/* Services Grid (3-Column Layout: 2 Neat Rows of 3 Cards) */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 mt-4"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-6"
         >
           {servicesData.items.map((service) => (
-            <motion.div
+            <motion.a
               key={service.id}
+              href="#contact"
+              onClick={handleCardClick}
               variants={cardVariants}
-              className="group relative bg-[var(--card)] rounded-3xl p-8 lg:p-10 border border-[var(--border)] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col h-full overflow-hidden"
+              whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.25 } }}
+              className="group relative bg-[var(--card)] rounded-2xl p-7 lg:p-8 border border-[var(--border)] shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-500/40 transition-all duration-300 flex flex-col h-full overflow-hidden cursor-pointer no-underline"
             >
-              {/* Subtle gradient hover effect inside card */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              {/* Subtle background glow effect on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+              {/* Corner Interactive Arrow */}
+              <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                </svg>
+              </div>
 
               {/* Icon Container */}
-              <div className="relative z-10 w-14 h-14 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300 shadow-sm">
+              <div className="relative z-10 w-12 h-12 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-300 shadow-sm">
                 <ServiceIcon type={service.icon} />
               </div>
 
               {/* Content */}
               <div className="relative z-10 flex flex-col flex-grow">
-                <h3 className="text-2xl font-bold text-[var(--foreground)] mb-4 tracking-tight">
+                <h3 className="text-xl font-bold text-[var(--foreground)] mb-3 tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
                   {service.title}
                 </h3>
-                <p className="text-[var(--muted-foreground)] text-lg leading-relaxed mb-8 flex-grow">
+                <p className="text-[var(--muted-foreground)] text-sm md:text-base leading-relaxed flex-grow">
                   {service.description}
                 </p>
-
-                {/* Learn More Link */}
-                <a
-                  href={service.href}
-                  className="inline-flex items-center text-base font-semibold text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors mt-auto w-fit focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm"
-                >
-                  Learn more
-                  <svg
-                    className="w-5 h-5 ml-1 transition-transform duration-300 group-hover:translate-x-1.5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2.5}
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                  </svg>
-                </a>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </motion.div>
       </Container>
