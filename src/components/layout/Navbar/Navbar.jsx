@@ -85,12 +85,12 @@ export const Navbar = () => {
         <a 
           href="#" 
           onClick={(e) => handleNavClick(e, '#', false)}
-          className="flex-shrink-0 flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-lg py-1"
+          className="flex-shrink-0 flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] py-1"
         >
           <img 
             src={logoImg} 
             alt="PentaByte Labs Logo" 
-            className="h-10 md:h-11 w-auto object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.65)] dark:drop-shadow-none transition-transform duration-300 group-hover:scale-105" 
+            className="h-10 md:h-11 w-auto object-contain invert dark:invert-0 transition-transform duration-300 group-hover:scale-105" 
           />
         </a>
 
