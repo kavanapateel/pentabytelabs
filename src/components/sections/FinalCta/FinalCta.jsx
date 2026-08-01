@@ -36,7 +36,7 @@ export const FinalCta = () => {
           </p>
           
           <a href={finalCtaData.button.href} className="focus:outline-none">
-            <Button variant="primary" size="large" className="shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:shadow-[0_0_30px_rgba(59,130,246,0.6)] hover:-translate-y-1 transition-all duration-300 px-10 py-4 text-lg border-0 bg-blue-600 text-white hover:bg-blue-500 cursor-pointer">
+            <Button variant="primary" size="large">
               {finalCtaData.button.label}
             </Button>
           </a>

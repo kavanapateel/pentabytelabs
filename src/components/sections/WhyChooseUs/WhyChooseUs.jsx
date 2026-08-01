@@ -3,7 +3,7 @@ import { Container, Section, SectionHeader } from '../../ui';
 import { whyChooseUsData } from '../../../data';
 
 const FeatureIcon = ({ type }) => {
-  const iconClasses = "w-6 h-6 transition-transform duration-500 group-hover:scale-110";
+  const iconClasses = "w-6 h-6 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3";
   
   switch (type) {
     case 'users':
@@ -56,24 +56,32 @@ export const WhyChooseUs = () => {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }
+      transition: { 
+        staggerChildren: 0.1,
+        delayChildren: 0.1 
+      }
     }
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } }
+    hidden: { opacity: 0, y: 30, scale: 0.97 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } 
+    }
   };
 
   return (
-    <Section id="why-choose-us" background="muted">
+    <Section id="why-choose-us" background="muted" className="pt-4 pb-12 md:pt-8 md:pb-16">
       <Container>
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <SectionHeader
             badge={whyChooseUsData.header.badge}
@@ -83,34 +91,35 @@ export const WhyChooseUs = () => {
           />
         </motion.div>
 
-        {/* Features Grid */}
+        {/* Features Grid (3 Columns on Desktop: 2 Symmetrical Rows of 3 Cards) */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-12"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-8"
         >
           {whyChooseUsData.features.map((feature) => (
             <motion.div
               key={feature.id}
               variants={cardVariants}
-              className="group relative bg-[var(--background)] rounded-2xl p-8 border border-[var(--border)] shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col h-full overflow-hidden"
+              whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.25 } }}
+              className="group relative bg-[var(--card)] rounded-2xl p-7 lg:p-8 border border-[var(--border)] shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-500/40 transition-all duration-300 flex flex-col h-full overflow-hidden cursor-pointer"
             >
               {/* Subtle top border gradient accent on hover */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
               {/* Icon Container */}
-              <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-6 transition-colors duration-300">
+              <div className="w-12 h-12 rounded-xl bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/20 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-5 group-hover:bg-purple-600 group-hover:text-white group-hover:border-purple-600 transition-all duration-300 shadow-sm">
                 <FeatureIcon type={feature.icon} />
               </div>
 
               {/* Content */}
               <div className="flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-[var(--foreground)] mb-3 tracking-tight">
+                <h3 className="text-xl font-bold text-[var(--foreground)] mb-3 tracking-tight group-hover:text-purple-500 transition-colors duration-300">
                   {feature.title}
                 </h3>
-                <p className="text-[var(--muted-foreground)] leading-relaxed text-base flex-grow">
+                <p className="text-[var(--muted-foreground)] leading-relaxed text-sm md:text-base flex-grow">
                   {feature.description}
                 </p>
               </div>

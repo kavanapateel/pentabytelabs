@@ -3,7 +3,7 @@ import { Container, Section, SectionHeader } from '../../ui';
 import { processData } from '../../../data';
 
 const ProcessIcon = ({ type }) => {
-  const iconClasses = "w-6 h-6 transition-transform duration-500 group-hover:scale-110";
+  const iconClasses = "w-6 h-6 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3";
   
   switch (type) {
     case 'search':
@@ -56,24 +56,32 @@ export const DevelopmentProcess = () => {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 }
+      transition: { 
+        staggerChildren: 0.1,
+        delayChildren: 0.1 
+      }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+    hidden: { opacity: 0, y: 30, scale: 0.97 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } 
+    }
   };
 
   return (
-    <Section id="process" background="muted">
+    <Section id="process" background="muted" className="pt-4 pb-12 md:pt-8 md:pb-16">
       <Container>
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <SectionHeader
             badge={processData.header.badge}
@@ -88,59 +96,43 @@ export const DevelopmentProcess = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="relative mt-16"
+          viewport={{ once: true, margin: "-80px" }}
+          className="relative mt-12"
         >
-          {/* Mobile connecting line (vertical) */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500/20 via-purple-500/20 to-blue-500/0 md:hidden z-0"></div>
+
 
           {/* Desktop/Tablet Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 gap-x-8">
-            {processData.steps.map((step, index) => {
-              // Calculate if this item should show a horizontal connecting line to the next item
-              // Hidden on the last item of a row depending on breakpoint
-              const hideLineMd = (index + 1) % 2 === 0;
-              const hideLineLg = (index + 1) % 3 === 0;
-
-              return (
-                <motion.div
-                  key={step.id}
-                  variants={itemVariants}
-                  className="relative group z-10 flex md:flex-col md:items-center text-left md:text-center"
-                >
-                  {/* Connecting Line (Horizontal) - Hidden on mobile, controlled by pseudo-classes based on index */}
-                  {index !== processData.steps.length - 1 && (
-                    <div 
-                      className={`hidden md:block absolute top-8 left-1/2 w-full h-[2px] bg-gradient-to-r from-[var(--border)] to-[var(--border)] -z-10
-                        ${hideLineMd ? 'md:hidden lg:block' : ''} 
-                        ${hideLineLg ? 'lg:hidden' : ''}
-                      `}
-                    ></div>
-                  )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-8">
+            {processData.steps.map((step) => (
+              <motion.div
+                key={step.id}
+                variants={itemVariants}
+                whileHover={{ y: -5, transition: { duration: 0.25 } }}
+                className="relative group z-10 flex md:flex-col md:items-center text-left md:text-center p-6 lg:p-7 rounded-2xl bg-[var(--card)] border border-[var(--border)] shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-500/40 transition-all duration-300 cursor-pointer"
+              >
 
                   {/* Icon & Number Container */}
-                  <div className="relative flex-shrink-0 mr-6 md:mr-0 md:mb-6">
-                    <div className="w-16 h-16 rounded-full bg-[var(--background)] border-2 border-[var(--border)] shadow-sm flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover:border-blue-500 transition-colors duration-300 relative z-10 bg-clip-padding">
+                  <div className="relative flex-shrink-0 mr-6 md:mr-0 md:mb-5">
+                    <div className="w-14 h-14 rounded-2xl bg-blue-500/10 dark:bg-blue-500/15 border border-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-300 shadow-sm">
                       <ProcessIcon type={step.icon} />
                     </div>
                     {/* Floating Step Number */}
-                    <div className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-md transform group-hover:scale-110 transition-transform duration-300">
+                    <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-md transform group-hover:scale-110 transition-transform duration-300">
                       {step.number}
                     </div>
                   </div>
 
                   {/* Content */}
                   <div>
-                    <h3 className="text-xl font-bold text-[var(--foreground)] mb-3 tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                    <h3 className="text-lg md:text-xl font-bold text-[var(--foreground)] mb-2.5 tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
                       {step.title}
                     </h3>
-                    <p className="text-[var(--muted-foreground)] leading-relaxed text-base">
+                    <p className="text-[var(--muted-foreground)] leading-relaxed text-sm md:text-base">
                       {step.description}
                     </p>
                   </div>
                 </motion.div>
-              );
-            })}
+            ))}
           </div>
         </motion.div>
       </Container>
