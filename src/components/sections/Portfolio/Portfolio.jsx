@@ -7,30 +7,47 @@ export const Portfolio = () => {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 }
+      transition: { 
+        staggerChildren: 0.1,
+        delayChildren: 0.1 
+      }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+    hidden: { opacity: 0, y: 30, scale: 0.98 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } 
+    }
   };
 
+  const packageDeliverables = [
+    { text: '7-Day Guaranteed Turnaround', icon: '⚡' },
+    { text: 'Custom UI/UX & Brand System', icon: '🎨' },
+    { text: 'Mobile & Tablet Responsive', icon: '📱' },
+    { text: 'SEO & Speed Optimization', icon: '🚀' },
+    { text: 'Domain & SSL Setup', icon: '🔒' },
+    { text: '30-Day Free Post-Launch Support', icon: '🛠️' }
+  ];
+
   return (
-    <Section id="portfolio" background="default">
+    <Section id="portfolio" background="default" className="pt-4 pb-12 md:pt-8 md:pb-16">
       <Container>
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
           <SectionHeader
             badge={portfolioData.header.badge}
             title={portfolioData.header.title}
             description={portfolioData.header.description}
-            align="left"
+            align="center"
           />
         </motion.div>
 
@@ -38,119 +55,115 @@ export const Portfolio = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="flex flex-col gap-8 lg:gap-12 mt-12"
+          viewport={{ once: true, margin: "-80px" }}
+          className="flex flex-col gap-8 lg:gap-10 mt-8"
         >
-          {/* Featured Project */}
+          {/* Featured Flagship Package Card */}
           <motion.div 
             variants={itemVariants}
-            className="group relative bg-[var(--card)] rounded-3xl border border-[var(--border)] overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 grid grid-cols-1 lg:grid-cols-2"
+            className="group relative bg-[var(--card)] rounded-3xl border border-[var(--border)] overflow-hidden shadow-sm hover:shadow-xl hover:border-blue-500/40 transition-all duration-500 grid grid-cols-1 lg:grid-cols-2"
           >
-            {/* Featured Image Side */}
-            <div className="h-64 sm:h-80 lg:h-full bg-gradient-to-br from-zinc-100 to-zinc-200 dark:from-zinc-900 dark:to-zinc-800 flex items-center justify-center relative overflow-hidden">
-              {/* Subtle animated gradient overlay */}
-              <div className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
-              
-              <div className="relative z-10 flex flex-col items-center p-6 text-center transform group-hover:scale-105 transition-transform duration-700">
-                <svg className="w-16 h-16 text-blue-500/50 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                <span className="font-semibold text-lg text-[var(--muted-foreground)] tracking-wide">
-                  {portfolioData.featuredProject.imagePlaceholder}
+            {/* Left Side: Package Deliverables Feature Box (Replaces empty image placeholder) */}
+            <div className="p-8 lg:p-10 bg-gradient-to-br from-blue-900/10 via-purple-900/10 to-transparent flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-[var(--border)] relative overflow-hidden">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="w-3 h-3 rounded-full bg-blue-500 animate-pulse" />
+                <span className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">
+                  Flagship Offering
                 </span>
               </div>
-              <div className="absolute inset-0 opacity-[0.05] dark:opacity-10" style={{ backgroundImage: 'radial-gradient(var(--foreground) 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
-            </div>
+              <h4 className="text-xl font-bold text-[var(--foreground)] mb-6">
+                Package Included Deliverables:
+              </h4>
 
-            {/* Featured Content Side */}
-            <div className="p-8 lg:p-12 xl:p-16 flex flex-col justify-center bg-[var(--card)]">
-              <span className="text-sm font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-3">
-                {portfolioData.featuredProject.category}
-              </span>
-              <h3 className="text-3xl sm:text-4xl font-extrabold text-[var(--foreground)] mb-6 tracking-tight">
-                {portfolioData.featuredProject.title}
-              </h3>
-              <p className="text-[var(--muted-foreground)] text-lg leading-relaxed mb-8">
-                {portfolioData.featuredProject.description}
-              </p>
-              
-              {/* Technologies */}
-              <div className="flex flex-wrap gap-2 mb-10">
-                {portfolioData.featuredProject.technologies.map(tech => (
-                  <span key={tech} className="px-3 py-1 rounded-full text-xs font-semibold bg-[var(--muted)] text-[var(--foreground)] border border-[var(--border)]">
-                    {tech}
-                  </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-2">
+                {packageDeliverables.map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-3 p-3.5 rounded-xl bg-[var(--background)]/80 border border-[var(--border)] shadow-xs">
+                    <span className="text-lg">{item.icon}</span>
+                    <span className="text-xs md:text-sm font-semibold text-[var(--foreground)]">{item.text}</span>
+                  </div>
                 ))}
               </div>
+            </div>
 
-              <a href={portfolioData.featuredProject.href} className="focus:outline-none w-fit">
-                <Button variant="primary" className="w-fit shadow-md group-hover:shadow-lg transition-all cursor-pointer" size="large">
-                  View Case Study
+            {/* Right Side: Package Details & CTA */}
+            <div className="p-8 lg:p-10 xl:p-12 flex flex-col justify-between bg-[var(--card)]">
+              <div>
+                <span className="inline-block text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-3 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20">
+                  {portfolioData.featuredProject.category}
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] mb-4 tracking-tight">
+                  {portfolioData.featuredProject.title}
+                </h3>
+                <p className="text-[var(--muted-foreground)] text-base md:text-lg leading-relaxed mb-6">
+                  {portfolioData.featuredProject.description}
+                </p>
+                
+                {/* Technology Chips */}
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {portfolioData.featuredProject.technologies.map(tech => (
+                    <span key={tech} className="px-3 py-1 rounded-lg text-xs font-semibold bg-[var(--muted)] text-[var(--foreground)] border border-[var(--border)]">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <a href="#contact" className="focus:outline-none w-fit mt-2">
+                <Button variant="primary" size="large">
+                  Inquire About Package
                 </Button>
               </a>
             </div>
           </motion.div>
 
-          {/* Secondary Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Secondary Packages Grid (3 Columns) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {portfolioData.projects.map((project) => (
               <motion.div 
                 key={project.id}
                 variants={itemVariants}
-                className="group flex flex-col bg-[var(--card)] rounded-2xl border border-[var(--border)] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5"
+                whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.25 } }}
+                className="group flex flex-col bg-[var(--card)] rounded-2xl border border-[var(--border)] p-7 lg:p-8 shadow-sm hover:shadow-xl hover:border-blue-500/40 transition-all duration-300 cursor-pointer"
               >
-                {/* Secondary Image */}
-                <div className="h-56 bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900/50 dark:to-zinc-800/50 flex items-center justify-center relative overflow-hidden border-b border-[var(--border)]">
-                  <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
-                  <div className="relative z-10 flex flex-col items-center transform group-hover:scale-105 transition-transform duration-500">
-                    <svg className="w-10 h-10 text-[var(--muted-foreground)]/50 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <span className="font-medium text-sm text-[var(--muted-foreground)] tracking-wide px-4 text-center">
-                      {project.imagePlaceholder}
-                    </span>
-                  </div>
-                  <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style={{ backgroundImage: 'linear-gradient(var(--foreground) 1px, transparent 1px), linear-gradient(90deg, var(--foreground) 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
-                </div>
-
-                {/* Secondary Content */}
-                <div className="p-6 lg:p-8 flex flex-col flex-grow">
-                  <span className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-2">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20">
                     {project.category}
                   </span>
-                  <h3 className="text-xl font-bold text-[var(--foreground)] mb-3 tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-[var(--muted-foreground)] text-base leading-relaxed mb-6 flex-grow">
-                    {project.description}
-                  </p>
-                  
-                  {/* Technology Chips */}
-                  <div className="flex flex-wrap gap-2 mb-8 mt-auto">
-                    {project.technologies.map(tech => (
-                      <span key={tech} className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-[var(--background)] text-[var(--muted-foreground)] border border-[var(--border)]">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* CTA */}
-                  <a
-                    href={project.href}
-                    className="inline-flex items-center text-sm font-semibold text-[var(--foreground)] group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors w-fit focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm"
-                  >
-                    View Details
-                    <svg
-                      className="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                    </svg>
-                  </a>
+                  <span className="text-xs font-semibold text-[var(--muted-foreground)]">Pre-Packaged</span>
                 </div>
+
+                <h3 className="text-xl font-bold text-[var(--foreground)] mb-3 tracking-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {project.title}
+                </h3>
+                <p className="text-[var(--muted-foreground)] text-sm md:text-base leading-relaxed mb-6 flex-grow">
+                  {project.description}
+                </p>
+                
+                {/* Technology Chips */}
+                <div className="flex flex-wrap gap-2 mb-6 mt-auto">
+                  {project.technologies.map(tech => (
+                    <span key={tech} className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-[var(--background)] text-[var(--muted-foreground)] border border-[var(--border)]">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {/* CTA */}
+                <a
+                  href="#contact"
+                  className="inline-flex items-center text-sm font-semibold text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors w-fit focus:outline-none"
+                >
+                  Inquire Package
+                  <svg
+                    className="w-4 h-4 ml-1.5 transition-transform duration-300 group-hover:translate-x-1.5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                  </svg>
+                </a>
               </motion.div>
             ))}
           </div>
