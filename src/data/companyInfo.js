@@ -1,12 +1,12 @@
 export const companyInfo = {
   name: 'PentaByte Labs',
-  tagline: 'Engineering Digital Excellence',
-  description: 'A premium technology consulting firm specializing in AI, Cloud computing, custom software development, and digital transformation.',
-  foundedYear: 2024,
+  tagline: 'Your On-Demand Technology Partner',
+  description: 'Pentabyte Labs specializes in custom software development, AI/ML solutions, game development, and automation to drive business innovation and growth.',
+  foundedYear: 2019,
   logoUrl: '/logo.svg',
   socialMedia: [
-    { id: 'twitter', platform: 'Twitter', url: '#', icon: 'twitter-icon' },
     { id: 'linkedin', platform: 'LinkedIn', url: '#', icon: 'linkedin-icon' },
-    { id: 'github', platform: 'GitHub', url: '#', icon: 'github-icon' },
+    { id: 'instagram', platform: 'Instagram', url: '#', icon: 'instagram-icon' },
+    { id: 'youtube', platform: 'YouTube', url: 'https://youtube.com/@learnwithpentabytelabs?si=Dhpq4jud0cym0ylX', icon: 'youtube-icon' },
   ],
 };

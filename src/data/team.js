@@ -1,36 +1,32 @@
-/**
- * IMPORTANT: PLACEHOLDER DATA
- * The leadership members below are placeholders. 
- * They must be replaced with the real leadership/engineering team before moving to production.
- */
-
 export const teamData = {
   header: {
     badge: 'Our Leadership',
-    title: 'Who We Are',
-    description: 'PentaByte Labs is led by senior systems architects and engineering leads who prioritize technical excellence, security, and clear execution.'
+    title: 'Meet The Experts',
+    description: 'We are a dedicated team of passionate developers, data scientists, designers, and strategists committed to turning your complex challenges into elegant technology solutions.'
   },
   members: [
     {
-      id: 'member-1',
-      name: 'Alex Mercer',
-      role: 'Chief Executive Officer & Architect',
-      bio: 'Enterprise systems architect with over 15 years of experience designing high-throughput databases and managing cloud-native software engineering teams.',
-      linkedin: 'https://linkedin.com/company/pentabyte-labs'
+      id: 'hrithvik',
+      name: 'Hrithvik S Acharya',
+      role: 'Founder & CEO',
+      bio: 'With a background in enterprise-scale software architecture, Hrithvik founded PentaByte Labs to create a leaner, more agile technology partner for businesses ready to innovate. Combining technical depth with business insight, he focuses on building scalable solutions while driving financial strategy and sustainable growth.',
+      linkedin: 'https://linkedin.com',
+      instagram: 'https://instagram.com'
     },
     {
-      id: 'member-2',
-      name: 'Dr. Sarah Chen',
-      role: 'Head of AI & Machine Learning',
-      bio: 'Machine learning engineer specializing in custom inference pipelines, neural networks, and integrating LLMs into secure enterprise software platforms.',
-      linkedin: 'https://linkedin.com/company/pentabyte-labs'
+      id: 'roshan',
+      name: 'Roshan Keshav',
+      role: 'Co-Founder & CTO',
+      bio: 'With a sharp focus on data, automation, and intelligent systems, Roshan leads the technical vision at PentaByte Labs, transforming raw data into scalable systems that drive real business outcomes. From AI-driven architectures to seamless automation, he ensures our technology stays ahead.',
+      linkedin: 'https://linkedin.com',
+      instagram: 'https://instagram.com'
     },
     {
-      id: 'member-3',
-      name: 'Marcus Thorne',
-      role: 'VP of Systems Engineering',
-      bio: 'Systems engineer with deep expertise in Unix systems, container orchestration (Kubernetes), high-scale networking, and automated infrastructure (Terraform).',
-      linkedin: 'https://linkedin.com/company/pentabyte-labs'
+      id: 'prajwal',
+      name: 'Prajwal S',
+      role: 'Legal & Compliance Advisor',
+      bio: 'As Legal and Compliance Advisor, Prajwal ensures every aspect of operations is legally sound and fully compliant with industry regulations. From drafting clear client agreements to overseeing data protection, he provides the legal backbone supporting operational transparency.',
+      linkedin: 'https://linkedin.com'
     }
   ]
 };

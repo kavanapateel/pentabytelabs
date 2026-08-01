@@ -1,26 +1,27 @@
 export const contactData = {
   info: {
-    badge: 'Get in Touch',
-    title: "Let's Discuss Your Project",
-    description: 'Get in touch directly with our engineering team to discuss platform architecture, timelines, and resourcing.',
-    address: '123 Innovation Drive, Tech District, San Francisco, CA 94107',
-    phone: '+1 (555) 123-4567',
-    email: 'hello@pentabytelabs.com',
-    hours: 'Monday - Friday: 9:00 AM - 6:00 PM (PST)',
+    badge: 'Contact Us',
+    title: "Let's Build Something Great",
+    description: "Have a project in mind or just want to learn more? We're here to answer your questions and help you transform your business.",
+    address: 'Penta Byte Labs, N D residency, SF 01, 3rd floor, Nanjappa layout, Yelachenahalli, Bengaluru - 560078',
+    phone: '+91 78995 89799',
+    email: 'support@pentabytelabs.com',
+    hours: 'Monday - Saturday: 9:00 AM - 7:00 PM (IST)',
     socials: [
       { id: 'linkedin', platform: 'LinkedIn', url: '#' },
-      { id: 'twitter', platform: 'Twitter', url: '#' },
-      { id: 'github', platform: 'GitHub', url: '#' }
+      { id: 'instagram', platform: 'Instagram', url: '#' },
+      { id: 'youtube', platform: 'YouTube', url: 'https://youtube.com/@learnwithpentabytelabs?si=Dhpq4jud0cym0ylX' }
     ]
   },
   form: {
     services: [
-      'Custom Software Engineering',
-      'Cloud & DevOps Architecture',
-      'AI & Machine Learning Integrations',
-      'Mobile Application Development',
-      'Technical Architecture Consulting'
+      'Web & App Development',
+      'AI & Machine Learning',
+      'Automation & QA',
+      'Cloud Solutions & DevOps',
+      'ITeS & BPO',
+      'Others'
     ],
-    successMessage: 'Thank you. We have received your query. A senior engineer will review your project scope and contact you within 24 hours.'
+    successMessage: 'Thank you! Your message has been sent successfully. We will get back to you shortly.'
   }
 };

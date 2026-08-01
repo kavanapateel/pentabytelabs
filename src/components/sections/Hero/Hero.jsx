@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Container, Button, Section } from '../../ui';
 import { heroData } from '../../../data';
+import heroImg from '../../../assets/hero.png';
 
 export const Hero = () => {
   // Staggered animation variants
@@ -34,7 +35,7 @@ export const Hero = () => {
       </div>
 
       <Container className="relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Content */}
           <motion.div
@@ -44,7 +45,7 @@ export const Hero = () => {
             className="flex flex-col items-center text-center lg:items-start lg:text-left"
           >
             {/* Badge */}
-            <motion.div variants={itemVariants} className="mb-8">
+            <motion.div variants={itemVariants} className="mb-6 md:mb-8">
               <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase bg-zinc-100 text-zinc-800 dark:bg-zinc-800/80 dark:text-zinc-200 ring-1 ring-inset ring-zinc-500/20 shadow-sm backdrop-blur-md transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-700">
                 <span className="flex w-2 h-2 rounded-full bg-blue-500 mr-2 shadow-[0_0_8px_rgba(59,130,246,0.8)] animate-pulse"></span>
                 {heroData.badge}
@@ -54,10 +55,10 @@ export const Hero = () => {
             {/* Heading */}
             <motion.h1 
               variants={itemVariants}
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-[var(--foreground)] mb-6 leading-[1.05]"
+              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[var(--foreground)] mb-6 leading-[1.15]"
             >
-              <span className="block">{firstPart}</span>
-              {hasMultipleWords && (
+              {firstPart}{' '}
+              {lastPart && (
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 pb-2 mt-1">
                   {lastPart}
                 </span>
@@ -78,12 +79,12 @@ export const Hero = () => {
               className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto mb-12"
             >
               <a href={heroData.primaryCta.href} className="focus:outline-none w-full sm:w-auto">
-                <Button size="large" variant="primary" className="shadow-lg shadow-blue-500/25 hover:-translate-y-0.5 px-8 cursor-pointer w-full">
+                <Button size="large" variant="primary" className="shadow-lg shadow-blue-500/25 hover:-translate-y-0.5 px-8 cursor-pointer w-full font-semibold">
                   {heroData.primaryCta.label}
                 </Button>
               </a>
               <a href={heroData.secondaryCta.href} className="focus:outline-none w-full sm:w-auto">
-                <Button size="large" variant="ghost" className="shadow-sm hover:-translate-y-0.5 border border-[var(--border)] bg-[var(--background)] px-8 cursor-pointer w-full">
+                <Button size="large" variant="ghost" className="shadow-sm hover:-translate-y-0.5 border border-[var(--border)] bg-[var(--background)] px-8 cursor-pointer w-full font-semibold">
                   {heroData.secondaryCta.label}
                 </Button>
               </a>
@@ -105,25 +106,22 @@ export const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Illustration Placeholder */}
+          {/* Right Column: Hero Graphic Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full h-[400px] md:h-[500px] lg:h-[650px] rounded-3xl shadow-2xl overflow-hidden relative group flex items-center justify-center border border-zinc-200/50 dark:border-zinc-800/50 bg-[var(--background)]"
+            className="w-full h-auto max-h-[550px] rounded-3xl overflow-hidden relative group flex items-center justify-center border border-zinc-200/50 dark:border-zinc-800/50 bg-[var(--background)] shadow-xl p-4 md:p-6"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-zinc-50 to-white dark:from-zinc-900/80 dark:to-zinc-800/80 opacity-90 transition-opacity group-hover:opacity-100 backdrop-blur-xl"></div>
             
-            {/* Minimalist wireframe/placeholder illustration */}
-            <div className="relative z-10 flex flex-col items-center text-[var(--muted-foreground)]">
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-20 h-20 mb-6 opacity-40 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
-              </svg>
-              <p className="font-semibold tracking-widest uppercase text-sm">Enterprise Infrastructure</p>
-              <p className="text-xs opacity-60 mt-2 max-w-[200px] text-center">Visualizing secure backend pipelines, API gateways, and distributed cloud databases.</p>
-            </div>
-            
-            {/* Decorative grid pattern in placeholder */}
+            <img 
+              src={heroImg} 
+              alt="PentaByte Labs Technology Architecture" 
+              className="relative z-10 w-full h-full object-contain max-h-[480px] drop-shadow-md group-hover:scale-102 transition-transform duration-700" 
+            />
+
+            {/* Decorative grid pattern */}
             <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(var(--foreground) 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
           </motion.div>
 

@@ -1,6 +1,12 @@
 export const navigationData = [
-  { id: 'about', label: 'About', href: '#about' },
+  { id: 'home', label: 'Home', href: '#' },
   { id: 'services', label: 'Services', href: '#services' },
-  { id: 'portfolio', label: 'Portfolio', href: '#portfolio' },
-  { id: 'contact', label: 'Contact', href: '#contact' }
+  { id: 'team', label: 'Our Team', href: '#team' },
+  { id: 'careers', label: 'Careers/Blogs', href: '#contact' },
+  { 
+    id: 'learning', 
+    label: 'Start Learning', 
+    href: 'https://youtube.com/@learnwithpentabytelabs?si=Dhpq4jud0cym0ylX',
+    external: true 
+  }
 ];
