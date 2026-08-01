@@ -61,7 +61,7 @@ export const Hero = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6 w-full sm:w-auto"
           >
             <a href="#contact" className="focus:outline-none w-full sm:w-auto">
-              <Button size="large" variant="primary" className="shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1 transition-all duration-300 px-10 py-4 cursor-pointer text-base font-semibold">
+              <Button size="large" variant="primary">
                 Schedule a Consultation
               </Button>
             </a>
