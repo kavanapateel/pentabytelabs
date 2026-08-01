@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
-import { Container, Button, ThemeToggle } from '../../ui';
+import { Container, ThemeToggle } from '../../ui';
 import { navigationData, companyInfo } from '../../../data';
 import logoImg from '../../../assets/pentabyte-logo.png';
 
@@ -85,16 +85,13 @@ export const Navbar = () => {
         <a 
           href="#" 
           onClick={(e) => handleNavClick(e, '#', false)}
-          className="flex-shrink-0 flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-lg"
+          className="flex-shrink-0 flex items-center group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-lg py-1"
         >
           <img 
             src={logoImg} 
             alt="PentaByte Labs Logo" 
-            className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+            className="h-10 md:h-11 w-auto object-contain drop-shadow-[0_1px_2px_rgba(0,0,0,0.65)] dark:drop-shadow-none transition-transform duration-300 group-hover:scale-105" 
           />
-          <span className="font-bold text-xl tracking-tight text-[var(--foreground)] hidden sm:inline-block">
-            {companyInfo.name}
-          </span>
         </a>
 
         {/* Desktop Navigation */}
@@ -129,10 +126,21 @@ export const Navbar = () => {
         {/* Actions */}
         <div className="hidden md:flex items-center gap-4">
           <ThemeToggle />
-          <a href="#contact" onClick={(e) => handleNavClick(e, '#contact', false)} className="focus:outline-none">
-            <Button variant="primary" size="small" className="shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer font-semibold px-5">
-              Contact Us
-            </Button>
+          <a 
+            href="#contact" 
+            onClick={(e) => handleNavClick(e, '#contact', false)} 
+            className="relative inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-full border border-[var(--border)] text-[var(--foreground)] bg-[var(--background)]/80 hover:bg-[var(--muted)] hover:border-blue-500/40 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 shadow-sm backdrop-blur-md cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          >
+            <span>Contact Us</span>
+            <svg 
+              className="w-4 h-4 text-[var(--muted-foreground)] group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all duration-300" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor" 
+              strokeWidth={2}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+            </svg>
           </a>
         </div>
 
@@ -197,11 +205,12 @@ export const Navbar = () => {
                 <a 
                   href="#contact" 
                   onClick={(e) => handleNavClick(e, '#contact', false)} 
-                  className="block w-full focus:outline-none"
+                  className="flex items-center justify-center gap-2 w-full px-5 py-3 text-base font-semibold rounded-xl border border-[var(--border)] text-[var(--foreground)] bg-[var(--background)] hover:bg-[var(--muted)] transition-all shadow-sm"
                 >
-                  <Button variant="primary" size="medium" className="w-full shadow-md cursor-pointer">
-                    Contact Us
-                  </Button>
+                  <span>Contact Us</span>
+                  <svg className="w-4 h-4 text-[var(--muted-foreground)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
                 </a>
               </div>
             </div>
