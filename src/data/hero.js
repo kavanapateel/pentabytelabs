@@ -1,9 +1,9 @@
 export const heroData = {
-  badge: 'PentaByte Labs • Software & AI Engineers',
-  heading: 'We Build Scalable Software & Cloud Infrastructure',
-  description: 'A senior engineering partner for startups and enterprises. We architect high-performance backends, deploy custom AI models, and build robust web and mobile applications.',
+  badge: 'PentaByte Labs • Your On-Demand Technology Partner',
+  heading: 'Building the Scalable, Intelligent Software That Powers Your Business',
+  description: 'We are your on-demand technology partner, committed to transforming ideas into powerful digital solutions. From custom software development and AI/ML innovations to end-to-end quality engineering, we bring technology that scales with your vision.',
   primaryCta: {
-    label: "Let's Build Together",
+    label: 'Schedule a Consultation',
     href: '#contact'
   },
   secondaryCta: {
@@ -11,8 +11,8 @@ export const heroData = {
     href: '#services'
   },
   trustIndicators: [
-    'Senior Engineers Only',
-    'Cloud Native Architecture',
-    'Production-Grade Code'
+    'Custom Software & AI/ML',
+    'On-Demand Engineering',
+    'Tailored & Scalable Solutions'
   ]
 };

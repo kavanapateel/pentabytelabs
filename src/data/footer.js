@@ -1,44 +1,43 @@
 export const footerData = {
   company: {
     logo: 'PentaByte Labs',
-    description: 'Engineering the future of enterprise technology with scalable, secure, and intelligent digital solutions.',
-    email: 'hello@pentabytelabs.com',
-    phone: '+1 (555) 123-4567'
+    description: 'Your on-demand technology partner, building scalable software, AI/ML solutions, and custom applications.',
+    email: 'support@pentabytelabs.com',
+    phone: '+91 78995 89799'
   },
   linkGroups: [
     {
       title: 'Company',
       items: [
-        { label: 'About Us', href: '/about' },
-        { label: 'Our Team', href: '/team' },
-        { label: 'Careers', href: '/careers' },
-        { label: 'Contact', href: '/contact' }
+        { label: 'Home', href: '/' },
+        { label: 'About Us', href: '#about' },
+        { label: 'Our Team', href: '#team' },
+        { label: 'Contact Us', href: '#contact' }
       ]
     },
     {
       title: 'Services',
       items: [
-        { label: 'Custom Software', href: '/services/software' },
-        { label: 'Cloud Architecture', href: '/services/cloud' },
-        { label: 'AI & Data Science', href: '/services/ai' },
-        { label: 'Mobile Development', href: '/services/mobile' }
+        { label: 'Web & App Development', href: '#services' },
+        { label: 'AI & Automation', href: '#services' },
+        { label: 'Game Development', href: '#services' },
+        { label: 'Cloud & DevOps', href: '#services' }
       ]
     },
     {
       title: 'Quick Links',
       items: [
-        { label: 'Portfolio', href: '/portfolio' },
-        { label: 'Blog & Insights', href: '/blog' },
-        { label: 'Privacy Policy', href: '/privacy' },
-        { label: 'Terms of Service', href: '/terms' }
+        { label: 'Start Learning (YouTube)', href: 'https://youtube.com/@learnwithpentabytelabs?si=Dhpq4jud0cym0ylX' },
+        { label: 'Accelerated Packages', href: '#portfolio' },
+        { label: 'Privacy Policy', href: '#' },
+        { label: 'Terms of Service', href: '#' }
       ]
     }
   ],
   socials: [
     { id: 'linkedin', platform: 'LinkedIn', url: '#' },
-    { id: 'twitter', platform: 'Twitter', url: '#' },
-    { id: 'github', platform: 'GitHub', url: '#' },
-    { id: 'dribbble', platform: 'Dribbble', url: '#' }
+    { id: 'instagram', platform: 'Instagram', url: '#' },
+    { id: 'youtube', platform: 'YouTube', url: 'https://youtube.com/@learnwithpentabytelabs?si=Dhpq4jud0cym0ylX' }
   ],
-  copyright: `© ${new Date().getFullYear()} PentaByte Labs. All rights reserved.`
+  copyright: '© 2019 Pentabyte Labs. All Rights Reserved.'
 };

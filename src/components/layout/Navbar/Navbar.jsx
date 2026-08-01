@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import clsx from 'clsx';
 import { Container, Button, ThemeToggle } from '../../ui';
 import { navigationData, companyInfo } from '../../../data';
+import logoImg from '../../../assets/pentabyte-logo.png';
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,13 +15,11 @@ export const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    // Trigger once on mount to handle initial state if not at top
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when screen resizes to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 768) {
@@ -31,7 +30,6 @@ export const Navbar = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -43,51 +41,97 @@ export const Navbar = () => {
     };
   }, [isMobileMenuOpen]);
 
+  // Smooth scroll handler with offset for fixed header
+  const handleNavClick = (e, href, external) => {
+    if (external) return;
+
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.replace('#', '');
+
+      if (!targetId || targetId === '') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const element = document.getElementById(targetId);
+        if (element) {
+          const navHeight = 80;
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - navHeight;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+
+      if (isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    }
+  };
+
   return (
     <header
       className={clsx(
         'fixed top-0 left-0 right-0 z-[1100] transition-all duration-300',
         isScrolled
           ? 'py-3 md:py-4 glass border-b border-[var(--border)] shadow-sm'
-          : 'py-5 md:py-6 bg-transparent border-transparent'
+          : 'py-4 md:py-5 bg-transparent border-transparent'
       )}
     >
       <Container className="flex items-center justify-between">
         {/* Brand Logo */}
         <a 
           href="#" 
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          className="flex-shrink-0 flex items-center gap-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-lg"
+          onClick={(e) => handleNavClick(e, '#', false)}
+          className="flex-shrink-0 flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-lg"
         >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-            <span className="text-white font-bold text-lg leading-none">
-              {companyInfo.name.charAt(0)}
-            </span>
-          </div>
-          <span className="font-bold text-xl tracking-tight text-[var(--foreground)]">
-            {companyInfo.name.split(' ')[0]}
+          <img 
+            src={logoImg} 
+            alt="PentaByte Labs Logo" 
+            className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+          />
+          <span className="font-bold text-xl tracking-tight text-[var(--foreground)] hidden sm:inline-block">
+            {companyInfo.name}
           </span>
         </a>
 
         {/* Desktop Navigation */}
         <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-1">
           {navigationData.map((item) => (
-            <a
-              key={item.id}
-              href={item.href}
-              className="relative px-4 py-2 text-sm font-medium rounded-md text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
-            >
-              {item.label}
-            </a>
+            item.external ? (
+              <a
+                key={item.id}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative px-4 py-2 text-sm font-semibold rounded-md text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] flex items-center gap-1.5"
+              >
+                <span>{item.label}</span>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
+              </a>
+            ) : (
+              <a
+                key={item.id}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href, false)}
+                className="relative px-4 py-2 text-sm font-medium rounded-md text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] cursor-pointer"
+              >
+                {item.label}
+              </a>
+            )
           ))}
         </nav>
 
         {/* Actions */}
         <div className="hidden md:flex items-center gap-4">
           <ThemeToggle />
-          <a href="#contact" className="focus:outline-none">
-            <Button variant="primary" size="small" className="shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer">
-              Get Started
+          <a href="#contact" onClick={(e) => handleNavClick(e, '#contact', false)} className="focus:outline-none">
+            <Button variant="primary" size="small" className="shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer font-semibold px-5">
+              Contact Us
             </Button>
           </a>
         </div>
@@ -131,16 +175,32 @@ export const Navbar = () => {
                 <a
                   key={item.id}
                   href={item.href}
-                  className="block px-4 py-3 text-base font-medium rounded-md text-[var(--foreground)] hover:bg-[var(--muted)] hover:text-[var(--primary)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  target={item.external ? "_blank" : "_self"}
+                  rel={item.external ? "noopener noreferrer" : undefined}
+                  className={clsx(
+                    "block px-4 py-3 text-base font-medium rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] cursor-pointer",
+                    item.external 
+                      ? "text-blue-600 dark:text-blue-400 font-semibold flex items-center justify-between" 
+                      : "text-[var(--foreground)] hover:bg-[var(--muted)] hover:text-[var(--primary)]"
+                  )}
+                  onClick={(e) => handleNavClick(e, item.href, item.external)}
                 >
-                  {item.label}
+                  <span>{item.label}</span>
+                  {item.external && (
+                    <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                    </svg>
+                  )}
                 </a>
               ))}
               <div className="pt-4 mt-4 border-t border-[var(--border)]">
-                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="block w-full focus:outline-none">
+                <a 
+                  href="#contact" 
+                  onClick={(e) => handleNavClick(e, '#contact', false)} 
+                  className="block w-full focus:outline-none"
+                >
                   <Button variant="primary" size="medium" className="w-full shadow-md cursor-pointer">
-                    Get Started
+                    Contact Us
                   </Button>
                 </a>
               </div>

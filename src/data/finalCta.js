@@ -1,9 +1,9 @@
 export const finalCtaData = {
-  badge: 'Ready to build?',
-  title: 'Let\'s Discuss Your Engineering Requirements',
-  description: 'Reach out to schedule a technical call directly with one of our senior systems architects to discuss your project scope and timelines.',
+  badge: 'Ready to Innovate?',
+  title: "Let's Build Something Great Together",
+  description: 'Schedule a consultation with our team to discuss your project requirements, custom software needs, or AI automation goals.',
   button: {
-    label: 'Start Technical Discussion',
+    label: 'Schedule a Consultation',
     href: '#contact'
   }
 };

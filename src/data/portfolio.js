@@ -1,44 +1,44 @@
 export const portfolioData = {
   header: {
-    badge: 'Our Work',
-    title: 'Featured Deployments',
-    description: 'A selection of production systems we have engineered to solve high-concurrency, security, and scaling challenges.'
+    badge: 'Accelerated Packages & Solutions',
+    title: 'Pre-Packaged & Custom Offerings',
+    description: 'Get started quickly with our pre-packaged solutions designed for common business needs, rapid deployment, and high performance.'
   },
   featuredProject: {
-    id: 'project-1',
-    title: 'High-Throughput Payment Gateway',
-    description: 'Designed and deployed a highly secure, PCI-compliant payment engine processing over 500,000 requests daily. The system reduces API latency and supports active-active multi-region failover.',
-    category: 'Infrastructure & Security',
-    technologies: ['React', 'Node.js', 'AWS', 'PostgreSQL', 'Docker'],
-    imagePlaceholder: 'Enterprise FinTech System Schema',
+    id: 'package-7-day',
+    title: 'Website in 7 Days Package',
+    description: 'Rapid deployment package tailored for startups and businesses needing a professional, high-performance web presence delivered fast without compromising quality or responsiveness.',
+    category: 'Accelerated Package',
+    technologies: ['React', 'Tailwind CSS', 'Vite', 'SEO & Mobile Ready'],
+    imagePlaceholder: 'Website in 7 Days Layout',
     href: '#contact'
   },
   projects: [
     {
-      id: 'project-2',
-      title: 'AI Demand Forecasting Platform',
-      description: 'Built a predictive data pipeline using machine learning models to analyze order patterns and forecast supply chain needs, reducing stock imbalances.',
-      category: 'Data & Machine Learning',
-      technologies: ['Python', 'TensorFlow', 'React', 'GCP'],
-      imagePlaceholder: 'Demand Forecasting Dashboard',
+      id: 'package-crm',
+      title: 'Smart CRM Package',
+      description: 'Intelligent customer relationship and workflow automation system built to streamline lead tracking, customer management, and sales operations.',
+      category: 'Automation Package',
+      technologies: ['Node.js', 'AI & Machine Learning', 'PostgreSQL'],
+      imagePlaceholder: 'Smart CRM Interface',
       href: '#contact'
     },
     {
-      id: 'project-3',
-      title: 'HIPAA-Compliant Telehealth App',
-      description: 'Developed a cross-platform mobile application supporting encrypted video consults, patient schedules, and secure clinical records.',
-      category: 'Mobile Systems',
-      technologies: ['React Native', 'WebRTC', 'AWS'],
-      imagePlaceholder: 'Encrypted Telehealth Interface',
+      id: 'package-mvp',
+      title: 'Startup MVP Accelerator',
+      description: 'Lean MVP development package designed to turn core business ideas into functional, scalable, investor-ready software fast.',
+      category: 'Startup Package',
+      technologies: ['React Native', 'Node.js', 'AWS Cloud'],
+      imagePlaceholder: 'Startup MVP Prototype',
       href: '#contact'
     },
     {
-      id: 'project-4',
-      title: 'Enterprise ERP Migration',
-      description: 'Orchestrated the migration of a legacy, on-premise inventory system into a cloud-native microservices architecture, improving reliability.',
-      category: 'Cloud Migration',
-      technologies: ['Next.js', 'Go', 'Kubernetes'],
-      imagePlaceholder: 'ERP Microservices Layout',
+      id: 'package-mobile',
+      title: 'Mobile App for Shop Package',
+      description: 'High-performance cross-platform mobile application for iOS and Android, optimized for retail shops, e-commerce, and service booking.',
+      category: 'Mobile Application',
+      technologies: ['React Native', 'Firebase', 'API Integration'],
+      imagePlaceholder: 'Mobile App Layout',
       href: '#contact'
     }
   ]
