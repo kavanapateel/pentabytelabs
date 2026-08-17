@@ -93,8 +93,8 @@ export const Navbar = () => {
     <header
       className={clsx(
         'fixed top-0 left-0 right-0 z-[1100] transition-all duration-300',
-        isScrolled
-          ? 'py-3 md:py-4 glass border-b border-[var(--border)] shadow-sm'
+        isMobileMenuOpen || isScrolled
+          ? 'py-3 md:py-4 bg-[var(--background)] border-b border-[var(--border)] shadow-sm'
           : 'py-4 md:py-5 bg-transparent border-transparent'
       )}
     >
@@ -194,7 +194,7 @@ export const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-0 w-full glass bg-[var(--background)]/95 border-b border-[var(--border)] shadow-xl md:hidden overflow-hidden"
+            className="absolute top-full left-0 w-full bg-[var(--background)] border-b border-[var(--border)] shadow-2xl md:hidden overflow-hidden z-[1200]"
           >
             <div className="px-4 pt-2 pb-6 space-y-1">
               {navigationData.map((item) => (
