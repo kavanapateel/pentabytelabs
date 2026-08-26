@@ -16,24 +16,9 @@ export const Footer = () => {
             >
               {footerData.company.logo}
             </a>
-            <p className="text-[var(--muted-foreground)] text-sm leading-relaxed mb-4">
+            <p className="text-[var(--muted-foreground)] text-sm leading-relaxed">
               {footerData.company.description}
             </p>
-            
-            <div className="flex flex-col gap-1.5 text-sm">
-              <a 
-                href={`mailto:${footerData.company.email}`} 
-                className="text-[var(--foreground)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm w-fit"
-              >
-                {footerData.company.email}
-              </a>
-              <a 
-                href={`tel:${footerData.company.phone.replace(/[^0-9+]/g, '')}`} 
-                className="text-[var(--foreground)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm w-fit"
-              >
-                {footerData.company.phone}
-              </a>
-            </div>
           </div>
 
           {/* Columns 2-4: Links */}
@@ -58,11 +43,27 @@ export const Footer = () => {
           ))}
         </div>
 
-        {/* Footer Bottom / Copyright */}
-        <div className="pt-4 border-t border-[var(--border)] flex flex-col md:flex-row items-center justify-between gap-2">
-          <p className="text-[var(--muted-foreground)] text-xs md:text-sm text-center md:text-left">
+        {/* Footer Bottom / Copyright & Right Corner Contact Info */}
+        <div className="pt-4 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between gap-3 text-xs md:text-sm text-[var(--muted-foreground)]">
+          <p className="text-center sm:text-left">
             {footerData.copyright}
           </p>
+          
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-3 sm:gap-4 font-medium text-[var(--foreground)]">
+            <a 
+              href={`mailto:${footerData.company.email}`} 
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm"
+            >
+              {footerData.company.email}
+            </a>
+            <span className="hidden sm:inline text-[var(--border)]">•</span>
+            <a 
+              href={`tel:${footerData.company.phone.replace(/[^0-9+]/g, '')}`} 
+              className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm"
+            >
+              {footerData.company.phone}
+            </a>
+          </div>
         </div>
       </Container>
     </footer>
