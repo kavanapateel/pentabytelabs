@@ -132,7 +132,7 @@ export const Navbar = () => {
       className={clsx(
         'fixed top-0 left-0 right-0 z-[1100] transition-all duration-300',
         isMobileMenuOpen || isScrolled
-          ? 'py-3 md:py-4 bg-[var(--background)]/95 backdrop-blur-md border-b border-[var(--border)] shadow-xl shadow-black/80 dark:shadow-blue-500/10'
+          ? 'py-3 md:py-4 bg-[var(--background)]/95 backdrop-blur-md border-b border-[var(--border)] shadow-sm dark:shadow-xl dark:shadow-blue-500/10'
           : 'py-4 md:py-5 bg-[var(--background)]/80 backdrop-blur-md border-b border-transparent shadow-none'
       )}
     >
