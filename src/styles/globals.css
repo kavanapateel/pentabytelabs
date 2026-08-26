@@ -103,4 +103,25 @@
     line-height: 1.2;
     font-weight: 700;
   }
+
+  /* Custom Text Selection Highlight (Elegant Slate-Grey) */
+  ::selection {
+    background-color: #3f3f46; /* zinc-700 slate grey */
+    color: #ffffff;
+  }
+
+  ::-moz-selection {
+    background-color: #3f3f46;
+    color: #ffffff;
+  }
+
+  .light ::selection {
+    background-color: #cbd5e1; /* slate-300 soft grey */
+    color: #0f172a;
+  }
+
+  .light ::-moz-selection {
+    background-color: #cbd5e1;
+    color: #0f172a;
+  }
 }
