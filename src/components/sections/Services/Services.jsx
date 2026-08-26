@@ -120,23 +120,14 @@ export const Services = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-6"
         >
           {servicesData.items.map((service) => (
-            <motion.a
+            <motion.div
               key={service.id}
-              href="#contact"
-              onClick={handleCardClick}
               variants={cardVariants}
               whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.25 } }}
-              className="group relative bg-[var(--card)] rounded-2xl p-7 lg:p-8 border border-[var(--border)] shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-500/40 transition-all duration-300 flex flex-col h-full overflow-hidden cursor-pointer no-underline"
+              className="group relative bg-[var(--card)] rounded-2xl p-7 lg:p-8 border border-[var(--border)] shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-500/40 transition-all duration-300 flex flex-col h-full overflow-hidden"
             >
               {/* Subtle background glow effect on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-              {/* Corner Interactive Arrow */}
-              <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                </svg>
-              </div>
 
               {/* Icon Container */}
               <div className="relative z-10 w-12 h-12 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 flex items-center justify-center mb-5 group-hover:bg-blue-600 group-hover:text-white group-hover:border-blue-600 transition-all duration-300 shadow-sm">
@@ -152,7 +143,7 @@ export const Services = () => {
                   {service.description}
                 </p>
               </div>
-            </motion.a>
+            </motion.div>
           ))}
         </motion.div>
       </Container>

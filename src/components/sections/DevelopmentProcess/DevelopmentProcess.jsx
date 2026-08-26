@@ -108,7 +108,7 @@ export const DevelopmentProcess = () => {
                 key={step.id}
                 variants={itemVariants}
                 whileHover={{ y: -5, transition: { duration: 0.25 } }}
-                className="relative group z-10 flex md:flex-col md:items-center text-left md:text-center p-6 lg:p-7 rounded-2xl bg-[var(--card)] border border-[var(--border)] shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-500/40 transition-all duration-300 cursor-pointer"
+                className="relative group z-10 flex md:flex-col md:items-center text-left md:text-center p-6 lg:p-7 rounded-2xl bg-[var(--card)] border border-[var(--border)] shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-500/40 transition-all duration-300"
               >
 
                   {/* Icon & Number Container */}

@@ -104,7 +104,7 @@ export const About = () => {
               key={pillar.id}
               variants={itemVariants}
               whileHover={{ y: -5, scale: 1.02, transition: { duration: 0.25 } }}
-              className="group p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] shadow-sm hover:shadow-xl hover:border-blue-500/40 transition-all duration-300 flex flex-col justify-between cursor-pointer"
+              className="group p-6 rounded-2xl bg-[var(--card)] border border-[var(--border)] shadow-sm hover:shadow-xl hover:border-blue-500/40 transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="w-12 h-12 rounded-xl bg-blue-500/10 dark:bg-blue-500/15 border border-blue-500/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
