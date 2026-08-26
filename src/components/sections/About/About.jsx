@@ -1,6 +1,71 @@
-import { motion } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Container, Section, SectionHeader, Button } from '../../ui';
 import { aboutData } from '../../../data';
+
+const AnimatedCounter = ({ text }) => {
+  const [displayValue, setDisplayValue] = useState('1');
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    if (text === '24/7') {
+      let count = 1;
+      const duration = 1400;
+      const steps = 24;
+      const intervalTime = duration / steps;
+      const timer = setInterval(() => {
+        count += 1;
+        if (count >= 24) {
+          setDisplayValue('24/7');
+          clearInterval(timer);
+        } else {
+          setDisplayValue(`${count}/7`);
+        }
+      }, intervalTime);
+      return () => clearInterval(timer);
+    }
+
+    const match = text.match(/([0-9.]+)(.*)/);
+    if (!match) {
+      setDisplayValue(text);
+      return;
+    }
+
+    const targetNum = parseFloat(match[1]);
+    const suffix = match[2] || '';
+    const hasDecimals = match[1].includes('.');
+
+    let start = 1;
+    const duration = 1600;
+    const startTime = performance.now();
+
+    const updateCounter = (currentTime) => {
+      const elapsedTime = currentTime - startTime;
+      const progress = Math.min(elapsedTime / duration, 1);
+      const easeOutProgress = 1 - Math.pow(1 - progress, 3);
+      const currentNum = start + (targetNum - start) * easeOutProgress;
+
+      if (hasDecimals) {
+        setDisplayValue(`${currentNum.toFixed(1)}${suffix}`);
+      } else {
+        setDisplayValue(`${Math.floor(currentNum)}${suffix}`);
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCounter);
+      } else {
+        setDisplayValue(text);
+      }
+    };
+
+    requestAnimationFrame(updateCounter);
+  }, [isInView, text]);
+
+  return <span ref={ref}>{displayValue}</span>;
+};
 
 export const About = () => {
   const containerVariants = {
@@ -161,7 +226,9 @@ export const About = () => {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-16 text-center">
             {aboutData.stats.map((stat, index) => (
               <div key={index} className="flex flex-col items-center">
-                <span className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] mb-1">{stat.value}</span>
+                <span className="text-2xl sm:text-3xl font-extrabold text-[var(--foreground)] mb-1">
+                  <AnimatedCounter text={stat.value} />
+                </span>
                 <span className="text-xs sm:text-sm font-medium text-[var(--muted-foreground)] tracking-wide">{stat.label}</span>
               </div>
             ))}
