@@ -132,8 +132,8 @@ export const Navbar = () => {
       className={clsx(
         'fixed top-0 left-0 right-0 z-[1100] transition-all duration-300',
         isMobileMenuOpen || isScrolled
-          ? 'py-3 md:py-4 bg-[var(--background)]/90 backdrop-blur-md border-b border-[var(--border)] shadow-md shadow-black/10 dark:shadow-black/40'
-          : 'py-4 md:py-5 bg-[var(--background)]/80 backdrop-blur-md border-b border-[var(--border)]/50 shadow-sm shadow-black/5 dark:shadow-black/30'
+          ? 'py-3 md:py-4 bg-[var(--background)]/95 backdrop-blur-md border-b border-[var(--border)] shadow-xl shadow-black/80 dark:shadow-blue-500/10'
+          : 'py-4 md:py-5 bg-[var(--background)]/80 backdrop-blur-md border-b border-transparent shadow-none'
       )}
     >
       <Container className="relative flex items-center justify-between">
