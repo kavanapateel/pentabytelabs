@@ -87,7 +87,7 @@ export const Footer = () => {
             {footerData.copyright}
           </p>
           
-          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-4 font-medium text-[var(--foreground)]">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-4 font-normal text-[var(--muted-foreground)]">
             <a 
               href={`mailto:${footerData.company.email}`} 
               className="hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-sm"
