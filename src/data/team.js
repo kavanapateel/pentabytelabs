@@ -10,7 +10,7 @@ export const teamData = {
       name: 'Hrithvik S Acharya',
       role: 'Founder & CEO',
       bio: 'With a background in enterprise-scale software architecture, Hrithvik founded PentaByte Labs to create a leaner, more agile technology partner for businesses ready to innovate. Combining technical depth with business insight, he focuses on building scalable solutions while driving financial strategy and sustainable growth.',
-      linkedin: 'https://linkedin.com',
+      linkedin: 'https://www.linkedin.com/in/hrithvik-s-acharya-191683193?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       instagram: 'https://instagram.com'
     },
     {
@@ -18,7 +18,7 @@ export const teamData = {
       name: 'Roshan Keshav',
       role: 'Co-Founder & CTO',
       bio: 'With a sharp focus on data, automation, and intelligent systems, Roshan leads the technical vision at PentaByte Labs, transforming raw data into scalable systems that drive real business outcomes. From AI-driven architectures to seamless automation, he ensures our technology stays ahead.',
-      linkedin: 'https://linkedin.com',
+      linkedin: 'https://www.linkedin.com/in/roshan-keshav-a834822a6?utm_source=share_via&utm_content=profile&utm_medium=member_android',
       instagram: 'https://instagram.com'
     },
     {
