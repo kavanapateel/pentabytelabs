@@ -110,7 +110,7 @@ export const Navbar = () => {
           : 'py-4 md:py-5 bg-transparent border-transparent'
       )}
     >
-      <Container className="flex items-center justify-between">
+      <Container className="relative flex items-center justify-between">
         {/* Brand Logo */}
         <a 
           href="#" 
@@ -125,7 +125,7 @@ export const Navbar = () => {
         </a>
 
         {/* Desktop Navigation */}
-        <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-1">
+        <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
           {navigationData.map((item) => (
             item.external ? (
               <a

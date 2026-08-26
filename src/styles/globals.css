@@ -62,19 +62,19 @@
   }
 
   :root.light {
-    --background: #ffffff;
-    --foreground: #09090b;
+    --background: #f8fafc;
+    --foreground: #0f172a;
     --card: #ffffff;
-    --card-foreground: #09090b;
-    --border: #e4e4e7;
+    --card-foreground: #0f172a;
+    --border: #e2e8f0;
     
-    --primary: #3b82f6;
+    --primary: #2563eb;
     --primary-foreground: #ffffff;
-    --secondary: #8b5cf6;
+    --secondary: #7c3aed;
     --secondary-foreground: #ffffff;
 
-    --muted: #f4f4f5;
-    --muted-foreground: #71717a;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
   }
 
   /* CSS Reset & Setup */
