@@ -128,7 +128,7 @@ export const About = () => {
   ];
 
   return (
-    <Section id="about" background="default" className="pt-4 pb-12 md:pt-8 md:pb-16">
+    <Section id="about" background="default" className="py-12 md:py-16">
       <Container>
         {/* Centered Section Header */}
         <motion.div

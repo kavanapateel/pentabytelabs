@@ -20,7 +20,7 @@ export const Hero = () => {
   };
 
   return (
-    <Section id="hero" className="relative pt-20 pb-8 md:pt-24 lg:pt-28 md:pb-12 lg:pb-14 overflow-hidden bg-[var(--background)]">
+    <Section id="hero" className="relative pt-20 pb-10 md:pt-24 lg:pt-28 md:pb-14 lg:pb-16 overflow-hidden bg-[var(--background)]">
       {/* Dynamic Ambient Glow Background */}
       <div 
         className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-6xl h-[600px] pointer-events-none z-0 opacity-70 dark:opacity-80"
