@@ -8,16 +8,25 @@ import logoImg from '../../../assets/pentabyte-logo.png';
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentHash, setCurrentHash] = useState(typeof window !== 'undefined' ? window.location.hash : '');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 150);
+    };
+
+    const handleHash = () => {
+      setCurrentHash(window.location.hash);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('hashchange', handleHash);
     handleScroll();
     
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hashchange', handleHash);
+    };
   }, []);
 
   useEffect(() => {
@@ -89,6 +98,9 @@ export const Navbar = () => {
     }
   };
 
+  const isCareersPage = currentHash === '#careers' || currentHash === '#/careers';
+  const showHeaderContactBtn = isCareersPage || isScrolled;
+
   return (
     <header
       className={clsx(
@@ -147,7 +159,12 @@ export const Navbar = () => {
           <a 
             href="#contact" 
             onClick={(e) => handleNavClick(e, '#contact', false)} 
-            className="relative inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-full border border-[var(--border)] text-[var(--foreground)] bg-[var(--background)]/80 hover:bg-[var(--muted)] hover:border-blue-500/40 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 shadow-sm backdrop-blur-md cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className={clsx(
+              "relative inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-full border border-[var(--border)] text-[var(--foreground)] bg-[var(--background)]/80 hover:bg-[var(--muted)] hover:border-blue-500/40 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 shadow-sm backdrop-blur-md cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+              showHeaderContactBtn
+                ? "opacity-100 translate-y-0 pointer-events-auto"
+                : "opacity-0 -translate-y-2 pointer-events-none"
+            )}
           >
             <span>Contact Us</span>
             <svg 
