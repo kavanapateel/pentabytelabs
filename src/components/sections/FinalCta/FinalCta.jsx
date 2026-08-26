@@ -3,6 +3,20 @@ import { Container, Section, Button } from '../../ui';
 import { finalCtaData } from '../../../data';
 
 export const FinalCta = () => {
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    window.location.hash = 'contact';
+    setTimeout(() => {
+      const element = document.getElementById('contact');
+      if (element) {
+        const navHeight = 80;
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - navHeight;
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+      }
+    }, 100);
+  };
+
   return (
     <Section id="final-cta" className="relative overflow-hidden py-14 md:py-20 w-full">
       {/* Full-width Animated Gradient Background */}
@@ -35,7 +49,7 @@ export const FinalCta = () => {
             {finalCtaData.description}
           </p>
           
-          <a href="#contact" className="focus:outline-none">
+          <a href="#contact" onClick={handleContactClick} className="focus:outline-none cursor-pointer">
             <Button variant="primary" size="large">
               Schedule a Consultation ↓
             </Button>

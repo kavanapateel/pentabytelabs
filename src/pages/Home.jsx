@@ -5,10 +5,7 @@ import {
   WhyChooseUs,
   Technologies,
   DevelopmentProcess,
-  Portfolio,
-  Team,
-  FinalCta,
-  Contact
+  Portfolio
 } from '../components/sections';
 
 export const Home = () => {
@@ -21,9 +18,6 @@ export const Home = () => {
       <Technologies />
       <DevelopmentProcess />
       <Portfolio />
-      <Team />
-      <FinalCta />
-      <Contact />
     </>
   );
 };

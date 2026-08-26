@@ -74,7 +74,7 @@ export const WhyChooseUs = () => {
   };
 
   return (
-    <Section id="why-choose-us" background="muted" className="pt-4 pb-12 md:pt-8 md:pb-16">
+    <Section id="why-choose-us" background="muted" className="py-12 md:py-16">
       <Container>
         {/* Section Header */}
         <motion.div

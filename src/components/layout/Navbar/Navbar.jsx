@@ -15,33 +15,39 @@ export const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 150);
 
+      if (window.location.hash === '#contact' || window.location.hash === '#/contact') {
+        setActiveSection('contact');
+        return;
+      }
+
+      if (window.location.hash === '#services' || window.location.hash === '#/services') {
+        setActiveSection('services');
+        return;
+      }
+
       if (window.location.hash === '#careers' || window.location.hash === '#/careers') {
         setActiveSection('careers');
         return;
       }
 
-      const sections = ['services', 'team', 'contact'];
-      const scrollPos = window.scrollY + 220;
-
-      let current = 'home';
-      for (const sectionId of sections) {
-        const el = document.getElementById(sectionId);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            current = sectionId;
-            break;
-          }
-        }
+      if (window.location.hash === '#team' || window.location.hash === '#/team') {
+        setActiveSection('team');
+        return;
       }
-      setActiveSection(current);
+
+      setActiveSection('home');
     };
 
     const handleHash = () => {
       setCurrentHash(window.location.hash);
-      if (window.location.hash === '#careers' || window.location.hash === '#/careers') {
+      if (window.location.hash === '#contact' || window.location.hash === '#/contact') {
+        setActiveSection('contact');
+      } else if (window.location.hash === '#services' || window.location.hash === '#/services') {
+        setActiveSection('services');
+      } else if (window.location.hash === '#careers' || window.location.hash === '#/careers') {
         setActiveSection('careers');
+      } else if (window.location.hash === '#team' || window.location.hash === '#/team') {
+        setActiveSection('team');
       }
     };
 
@@ -84,11 +90,11 @@ export const Navbar = () => {
       e.preventDefault();
       const targetId = href.replace('#', '');
 
-      if (href === '#careers') {
-        window.location.hash = 'careers';
+      if (href === '#careers' || href === '#team' || href === '#services' || href === '#contact') {
+        window.location.hash = href.replace('#', '');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
-        if (window.location.hash === '#careers') {
+        if (window.location.hash === '#careers' || window.location.hash === '#team' || window.location.hash === '#services' || window.location.hash === '#contact') {
           window.location.hash = href === '#' ? '' : href;
           setTimeout(() => {
             if (!targetId || targetId === '') {
@@ -124,8 +130,11 @@ export const Navbar = () => {
     }
   };
 
+  const isContactPage = currentHash === '#contact' || currentHash === '#/contact';
+  const isServicesPage = currentHash === '#services' || currentHash === '#/services';
   const isCareersPage = currentHash === '#careers' || currentHash === '#/careers';
-  const showHeaderContactBtn = isCareersPage || isScrolled;
+  const isTeamPage = currentHash === '#team' || currentHash === '#/team';
+  const showHeaderContactBtn = isContactPage || isServicesPage || isCareersPage || isTeamPage || isScrolled;
 
   return (
     <header
@@ -153,10 +162,23 @@ export const Navbar = () => {
         {/* Desktop Navigation */}
         <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
           {navigationData.map((item) => {
+            const isContact = currentHash === '#contact' || currentHash === '#/contact';
+            const isServices = currentHash === '#services' || currentHash === '#/services';
+            const isTeam = currentHash === '#team' || currentHash === '#/team';
+            const isCareers = currentHash === '#careers' || currentHash === '#/careers';
+
             const isActive = 
-              item.id === 'careers'
-                ? (currentHash === '#careers' || currentHash === '#/careers')
-                : item.id === activeSection;
+              item.id === 'contact'
+                ? isContact
+                : item.id === 'services'
+                  ? isServices
+                  : item.id === 'careers'
+                    ? isCareers
+                    : item.id === 'team'
+                      ? isTeam
+                      : (isContact || isServices || isTeam || isCareers)
+                        ? false
+                        : item.id === activeSection;
 
             return item.external ? (
               <a
@@ -203,7 +225,10 @@ export const Navbar = () => {
             href="#contact" 
             onClick={(e) => handleNavClick(e, '#contact', false)} 
             className={clsx(
-              "relative inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-full border border-[var(--border)] text-[var(--foreground)] bg-[var(--background)]/80 hover:bg-[var(--muted)] hover:border-blue-500/40 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 shadow-sm backdrop-blur-md cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+              "relative inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-full transition-all duration-300 backdrop-blur-md cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+              isContactPage
+                ? "bg-blue-600 text-white border border-blue-500 shadow-md shadow-blue-500/20"
+                : "border border-[var(--border)] text-[var(--foreground)] bg-[var(--background)]/80 hover:bg-[var(--muted)] hover:border-blue-500/40 hover:text-blue-600 dark:hover:text-blue-400 shadow-sm",
               showHeaderContactBtn
                 ? "opacity-100 translate-y-0 pointer-events-auto"
                 : "opacity-0 -translate-y-2 pointer-events-none"
@@ -211,7 +236,10 @@ export const Navbar = () => {
           >
             <span>Contact Us</span>
             <svg 
-              className="w-4 h-4 text-[var(--muted-foreground)] group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-0.5 transition-all duration-300" 
+              className={clsx(
+                "w-4 h-4 group-hover:translate-x-0.5 transition-all duration-300",
+                isContactPage ? "text-white" : "text-[var(--muted-foreground)] group-hover:text-blue-600 dark:group-hover:text-blue-400"
+              )}
               fill="none" 
               viewBox="0 0 24 24" 
               stroke="currentColor" 
@@ -258,10 +286,23 @@ export const Navbar = () => {
           >
             <div className="px-4 pt-2 pb-6 space-y-1">
               {navigationData.map((item) => {
+                const isContact = currentHash === '#contact' || currentHash === '#/contact';
+                const isServices = currentHash === '#services' || currentHash === '#/services';
+                const isTeam = currentHash === '#team' || currentHash === '#/team';
+                const isCareers = currentHash === '#careers' || currentHash === '#/careers';
+
                 const isActive = 
-                  item.id === 'careers' 
-                    ? (currentHash === '#careers' || currentHash === '#/careers')
-                    : item.id === activeSection;
+                  item.id === 'contact'
+                    ? isContact
+                    : item.id === 'services'
+                      ? isServices
+                      : item.id === 'careers' 
+                        ? isCareers
+                        : item.id === 'team'
+                          ? isTeam
+                          : (isContact || isServices || isTeam || isCareers)
+                            ? false
+                            : item.id === activeSection;
 
                 return (
                   <a
