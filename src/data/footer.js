@@ -39,5 +39,5 @@ export const footerData = {
     { id: 'instagram', platform: 'Instagram', url: '#' },
     { id: 'youtube', platform: 'YouTube', url: 'https://youtube.com/@learnwithpentabytelabs?si=Dhpq4jud0cym0ylX' }
   ],
-  copyright: '© 2019 Pentabyte Labs. All Rights Reserved.'
+  copyright: '© 2026 Pentabyte Labs. All Rights Reserved.'
 };

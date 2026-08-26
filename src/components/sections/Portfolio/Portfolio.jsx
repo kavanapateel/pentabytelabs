@@ -123,7 +123,7 @@ export const Portfolio = () => {
                 key={project.id}
                 variants={itemVariants}
                 whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.25 } }}
-                className="group flex flex-col bg-[var(--card)] rounded-2xl border border-[var(--border)] p-7 lg:p-8 shadow-sm hover:shadow-xl hover:border-blue-500/40 transition-all duration-300 cursor-pointer"
+                className="group flex flex-col bg-[var(--card)] rounded-2xl border border-[var(--border)] p-7 lg:p-8 shadow-sm hover:shadow-xl hover:border-blue-500/40 transition-all duration-300"
               >
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20">

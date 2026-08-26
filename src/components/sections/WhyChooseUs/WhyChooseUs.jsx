@@ -104,7 +104,7 @@ export const WhyChooseUs = () => {
               key={feature.id}
               variants={cardVariants}
               whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.25 } }}
-              className="group relative bg-[var(--card)] rounded-2xl p-7 lg:p-8 border border-[var(--border)] shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-500/40 transition-all duration-300 flex flex-col h-full overflow-hidden cursor-pointer"
+              className="group relative bg-[var(--card)] rounded-2xl p-7 lg:p-8 border border-[var(--border)] shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:border-blue-500/40 transition-all duration-300 flex flex-col h-full overflow-hidden"
             >
               {/* Subtle top border gradient accent on hover */}
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

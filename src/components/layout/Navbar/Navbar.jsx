@@ -8,16 +8,51 @@ import logoImg from '../../../assets/pentabyte-logo.png';
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentHash, setCurrentHash] = useState(typeof window !== 'undefined' ? window.location.hash : '');
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 150);
+
+      if (window.location.hash === '#careers' || window.location.hash === '#/careers') {
+        setActiveSection('careers');
+        return;
+      }
+
+      const sections = ['services', 'team', 'contact'];
+      const scrollPos = window.scrollY + 220;
+
+      let current = 'home';
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            current = sectionId;
+            break;
+          }
+        }
+      }
+      setActiveSection(current);
+    };
+
+    const handleHash = () => {
+      setCurrentHash(window.location.hash);
+      if (window.location.hash === '#careers' || window.location.hash === '#/careers') {
+        setActiveSection('careers');
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('hashchange', handleHash);
     handleScroll();
     
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('hashchange', handleHash);
+    };
   }, []);
 
   useEffect(() => {
@@ -89,16 +124,19 @@ export const Navbar = () => {
     }
   };
 
+  const isCareersPage = currentHash === '#careers' || currentHash === '#/careers';
+  const showHeaderContactBtn = isCareersPage || isScrolled;
+
   return (
     <header
       className={clsx(
         'fixed top-0 left-0 right-0 z-[1100] transition-all duration-300',
         isMobileMenuOpen || isScrolled
-          ? 'py-3 md:py-4 bg-[var(--background)] border-b border-[var(--border)] shadow-sm'
-          : 'py-4 md:py-5 bg-transparent border-transparent'
+          ? 'py-3 md:py-4 bg-[var(--background)]/90 backdrop-blur-md border-b border-[var(--border)] shadow-md shadow-black/10 dark:shadow-black/40'
+          : 'py-4 md:py-5 bg-[var(--background)]/80 backdrop-blur-md border-b border-[var(--border)]/50 shadow-sm shadow-black/5 dark:shadow-black/30'
       )}
     >
-      <Container className="flex items-center justify-between">
+      <Container className="relative flex items-center justify-between">
         {/* Brand Logo */}
         <a 
           href="#" 
@@ -113,9 +151,14 @@ export const Navbar = () => {
         </a>
 
         {/* Desktop Navigation */}
-        <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-1">
-          {navigationData.map((item) => (
-            item.external ? (
+        <nav aria-label="Main Navigation" className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
+          {navigationData.map((item) => {
+            const isActive = 
+              item.id === 'careers'
+                ? (currentHash === '#careers' || currentHash === '#/careers')
+                : item.id === activeSection;
+
+            return item.external ? (
               <a
                 key={item.id}
                 href={item.href}
@@ -133,12 +176,24 @@ export const Navbar = () => {
                 key={item.id}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href, false)}
-                className="relative px-4 py-2 text-sm font-medium rounded-md text-[var(--foreground)] hover:bg-[var(--muted)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] cursor-pointer"
+                className={clsx(
+                  "relative px-4 py-2 text-sm font-semibold transition-colors duration-300 focus:outline-none cursor-pointer",
+                  isActive
+                    ? "text-blue-600 dark:text-blue-400"
+                    : "text-[var(--foreground)] hover:text-blue-600 dark:hover:text-blue-400"
+                )}
               >
-                {item.label}
+                <span>{item.label}</span>
+                {isActive && (
+                  <motion.span 
+                    layoutId="activeNavUnderline"
+                    className="absolute bottom-0 left-3 right-3 h-0.5 bg-blue-600 dark:bg-blue-400 rounded-full" 
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </a>
-            )
-          ))}
+            );
+          })}
         </nav>
 
         {/* Actions */}
@@ -147,7 +202,12 @@ export const Navbar = () => {
           <a 
             href="#contact" 
             onClick={(e) => handleNavClick(e, '#contact', false)} 
-            className="relative inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-full border border-[var(--border)] text-[var(--foreground)] bg-[var(--background)]/80 hover:bg-[var(--muted)] hover:border-blue-500/40 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 shadow-sm backdrop-blur-md cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className={clsx(
+              "relative inline-flex items-center gap-2 px-5 py-2 text-sm font-semibold rounded-full border border-[var(--border)] text-[var(--foreground)] bg-[var(--background)]/80 hover:bg-[var(--muted)] hover:border-blue-500/40 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 shadow-sm backdrop-blur-md cursor-pointer group focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+              showHeaderContactBtn
+                ? "opacity-100 translate-y-0 pointer-events-auto"
+                : "opacity-0 -translate-y-2 pointer-events-none"
+            )}
           >
             <span>Contact Us</span>
             <svg 
@@ -197,28 +257,37 @@ export const Navbar = () => {
             className="absolute top-full left-0 w-full bg-[var(--background)] border-b border-[var(--border)] shadow-2xl md:hidden overflow-hidden z-[1200]"
           >
             <div className="px-4 pt-2 pb-6 space-y-1">
-              {navigationData.map((item) => (
-                <a
-                  key={item.id}
-                  href={item.href}
-                  target={item.external ? "_blank" : "_self"}
-                  rel={item.external ? "noopener noreferrer" : undefined}
-                  className={clsx(
-                    "block px-4 py-3 text-base font-medium rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] cursor-pointer",
-                    item.external 
-                      ? "text-blue-600 dark:text-blue-400 font-semibold flex items-center justify-between" 
-                      : "text-[var(--foreground)] hover:bg-[var(--muted)] hover:text-[var(--primary)]"
-                  )}
-                  onClick={(e) => handleNavClick(e, item.href, item.external)}
-                >
-                  <span>{item.label}</span>
-                  {item.external && (
-                    <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                    </svg>
-                  )}
-                </a>
-              ))}
+              {navigationData.map((item) => {
+                const isActive = 
+                  item.id === 'careers' 
+                    ? (currentHash === '#careers' || currentHash === '#/careers')
+                    : item.id === activeSection;
+
+                return (
+                  <a
+                    key={item.id}
+                    href={item.href}
+                    target={item.external ? "_blank" : "_self"}
+                    rel={item.external ? "noopener noreferrer" : undefined}
+                    className={clsx(
+                      "block px-4 py-3 text-base rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] cursor-pointer",
+                      item.external 
+                        ? "text-blue-600 dark:text-blue-400 font-semibold flex items-center justify-between" 
+                        : isActive
+                          ? "text-blue-600 dark:text-blue-400 font-bold bg-blue-500/10 dark:bg-blue-500/15"
+                          : "text-[var(--foreground)] font-medium hover:bg-[var(--muted)]"
+                    )}
+                    onClick={(e) => handleNavClick(e, item.href, item.external)}
+                  >
+                    <span>{item.label}</span>
+                    {item.external && (
+                      <svg className="w-4 h-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                      </svg>
+                    )}
+                  </a>
+                );
+              })}
               <div className="pt-4 mt-4 border-t border-[var(--border)]">
                 <a 
                   href="#contact" 
